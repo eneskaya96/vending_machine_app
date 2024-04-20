@@ -1,0 +1,86 @@
+@use '../../variables/theme/types.scss';
+@use '../../variables/theme/colors.scss';
+@use '~bootstrap/scss/mixins/breakpoints' as bmb;
+@use '../../variables/theme/grids.scss';
+
+$navbar-height: 70px;
+
+.navbarContainer {
+  padding: 15px 50px 15px 20px;
+
+  .navbarLink {
+    text-decoration: underline;
+    color: rgb(158, 151, 151);
+    margin-right: 10px;
+
+    &:hover {
+      color: colors.$davys-gray;
+    }
+  }
+
+  .navbarLinkActive {
+    cursor: default;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    &:hover {
+      color: rgb(0, 0, 0);
+    }
+  }
+
+  .userMenuDropdown {
+    .userMenuDropdownToggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .username {
+      margin-right: 2px;
+    }
+
+    .userImageCircle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      display: inline-block;
+    }
+
+    .iconDropdownMenu {
+      background-color: colors.$grey-bg;
+      border-radius: 10px;
+      opacity: 1;
+      padding: 0;
+      overflow: hidden;
+
+      .iconDropdownInnerItem {
+        font-family: types.$font-family;
+        display: flex;
+        width: 100%;
+        line-height: 22px;
+        text-align: center;
+        font-size: 16px;
+        padding: 10px;
+
+        &:hover {
+          background-color: rgb(245, 245, 245);
+        }
+      }
+
+      .iconDropdownLogoutItem {
+        @extend .iconDropdownInnerItem;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+@include bmb.media-breakpoint-down(lg, grids.$grid-breakpoints) {
+  .navbarContainer {
+    .userMenuDropdown {
+      .username {
+        display: none;
+      }
+    }
+  }
+}

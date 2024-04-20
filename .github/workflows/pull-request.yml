@@ -1,0 +1,23 @@
+name: pull_request_lint
+on: [pull_request]
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install packages
+        run: yarn install
+
+      - name: Run Typescript Checks
+        run: yarn lint
+
+      - name: Fix prettier
+        run: yarn format:fix
+
+      - name: Run Project Buildable
+        run: yarn build

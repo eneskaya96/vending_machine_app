@@ -1,0 +1,48 @@
+@use '~bootstrap/scss/mixins/breakpoints' as bmb;
+@use '../../variables/theme/grids';
+@use '../../variables/theme/types.scss';
+@use '../../variables/theme/colors.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .title {
+    font-family: types.$font-family;
+    font-size: 16px;
+    min-width: 200px;
+  }
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .input {
+      font-size: 16px;
+      font-family: types.$font-family;
+    }
+    .invalidInput {
+      color: colors.$progress-red;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16px;
+      margin-top: 5px;
+    }
+  }
+}
+
+@include bmb.media-breakpoint-down(lg, grids.$grid-breakpoints) {
+  .container {
+    .title {
+      min-width: 150px;
+    }
+    .inputWrapper {
+      .input {
+        font-size: 14px;
+      }
+      .invalidInput {
+        font-size: 12px;
+        line-height: 12px;
+      }
+    }
+  }
+}

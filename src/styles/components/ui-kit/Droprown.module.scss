@@ -1,0 +1,328 @@
+@use '~bootstrap/scss/mixins/breakpoints' as bmb;
+@use '../../variables/theme/grids';
+@use '../../variables/theme/types';
+@use '../../variables/theme/colors.scss';
+
+.dropdownWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 38px;
+
+  .errorMessage {
+    position: absolute;
+    color: colors.$progress-red;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    bottom: -23px;
+  }
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  .labelText {
+    font-family: types.$font-family;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: -0.16px;
+    opacity: 1;
+    min-width: 200px;
+  }
+
+  .dropdownButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .dropdownButton {
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 12px;
+      background-color: transparent;
+      border-color: colors.$gray-300;
+      width: 100%;
+      min-height: 38px;
+
+      .dropdownTitleWrap {
+        display: flex;
+        align-items: center;
+        width: calc(100% - 0.875em);
+        padding-right: 8px;
+
+        .dropdownTitle {
+          font-family: types.$font-family;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 24px;
+          color: colors.$gray-900;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          .textColor {
+            color: colors.$grey-40;
+          }
+        }
+      }
+    }
+  }
+
+  &.invalid {
+    .labelText {
+      color: colors.$progress-red;
+      font-weight: 500;
+    }
+
+    .dropdownButtonWrapper {
+      .dropdownButton {
+        border-bottom-color: colors.$progress-red;
+      }
+    }
+  }
+}
+
+.dropdownMenu {
+  background: white;
+  width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  max-height: 320px;
+  padding: 16px 0;
+  margin-top: 12px;
+  background: colors.$white 0 0 no-repeat padding-box;
+  box-shadow: 0 0 14px #00000017;
+  border: 1px solid #70707029;
+  border-radius: 16px;
+  opacity: 1;
+
+  .dropdownMenuItemsContainer {
+    max-height: 200px;
+    overflow: auto;
+    margin: 12px 4px 10px 14px;
+  }
+
+  .dropdownMenuEmpty {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5px;
+
+    .emptyText {
+      font-family: types.$font-family;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 20px;
+      color: colors.$gray-900;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+  }
+
+  .searchInputContainer {
+    position: relative;
+    padding: 0 24px 16px 24px;
+    border-bottom: 1px solid rgba(colors.$dove-gray, 0.1);
+
+    .searchIcon {
+      position: absolute;
+      top: 11px;
+      right: 40px;
+      pointer-events: none;
+    }
+  }
+
+  .searchInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    margin: 0;
+    border: 1px solid colors.$dove-gray;
+    height: 38px;
+
+    &.notEmpty {
+      position: sticky;
+      justify-content: flex-start;
+      top: 0;
+    }
+  }
+
+  .newItemButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0;
+
+    &.notEmpty {
+      position: sticky;
+      justify-content: flex-start;
+      padding: 10px 7px;
+      top: 0;
+
+      &:hover {
+        font-weight: bold;
+        background-color: colors.$grey-5;
+      }
+    }
+
+    .addItemIcon {
+      margin-right: 6px;
+      font-size: 16px;
+    }
+
+    .addItemText {
+      text-decoration: underline;
+    }
+  }
+
+  .dropdownMenuBody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 200px;
+    overflow: auto;
+
+    .dropdownMenuItem {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      min-height: auto;
+
+      .dropdownLabel {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 8.5px 16px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: black;
+        }
+      }
+    }
+  }
+}
+
+@include bmb.media-breakpoint-down(lg, grids.$grid-breakpoints) {
+  .dropdownWrapper {
+    .errorMessage {
+      font-size: 12px;
+      line-height: 12px;
+      bottom: -17px;
+    }
+  }
+
+  .dropdown {
+    .labelText {
+      font-size: 16px;
+      letter-spacing: -0.12px;
+      min-width: 150px;
+    }
+
+    .dropdownButton {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 0 0 5px;
+
+      .dropdownTitleWrap {
+        .dropdownTitle {
+          font-size: 16px;
+          line-height: 20px;
+          letter-spacing: -0.16px;
+          color: colors.$grey-100;
+        }
+      }
+    }
+  }
+
+  .dropdownMenu {
+    max-width: 100%;
+    margin-top: 1px;
+    max-width: 300px;
+
+    &.mobileOpenBottom {
+      position: fixed !important;
+      bottom: 0 !important;
+      height: 100%;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      transform: unset !important;
+      padding-top: 50px;
+
+      &:before {
+        content: '';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 4px;
+        background: colors.$grey-18;
+        border-radius: 6px;
+        position: absolute;
+        top: 15px;
+        left: calc(50% - 40px);
+      }
+
+      .dropdownItem {
+        padding: 10px 16px;
+      }
+
+      .dropdownMenuItemsContainer {
+        max-height: calc(100% - 61px);
+      }
+    }
+
+    .dropdownMenuItemsContainer {
+      margin: 12px 4px 10px 0;
+    }
+
+    .searchInputContainer {
+      padding: 0 15px 16px 15px;
+
+      .searchIcon {
+        font-size: 15px;
+        top: 15px;
+        right: 30px;
+      }
+    }
+
+    .searchInput {
+      height: 44px;
+    }
+
+    .newItemButton {
+      font-size: 16px;
+      line-height: 20px;
+      &.notEmpty {
+        padding: 0px 10px;
+        margin-bottom: 10px;
+      }
+
+      .addItemIcon {
+        font-size: 16px;
+        margin-right: 6px;
+      }
+    }
+
+    .dropdownMenuBody {
+      .dropdownMenuItem {
+        font-size: 16px;
+      }
+    }
+  }
+}

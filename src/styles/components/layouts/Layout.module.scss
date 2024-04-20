@@ -1,0 +1,6 @@
+@use './Navbar.module.scss' as navbar;
+@use './Footer.module.scss' as footer;
+
+.container {
+  min-height: calc(100vh - (navbar.$navbar-height + footer.$footer-total-height));
+}

@@ -1,0 +1,13 @@
+@use '../layouts/Navbar.module.scss' as navbar;
+@use '../layouts/Footer.module.scss' as footer;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - (navbar.$navbar-height + footer.$footer-total-height));
+  background-color: white;
+}
+
+.fullPage {
+  height: 100vh !important;
+}

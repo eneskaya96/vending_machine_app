@@ -1,0 +1,18 @@
+$footer-total-height: 50px;
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .copyRightText {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: -0.16px;
+    color: #1d1d1d;
+    text-align: center;
+    height: $footer-total-height;
+    line-height: 24px;
+  }
+}
