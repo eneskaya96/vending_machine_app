@@ -6,11 +6,13 @@ import storage from 'redux-persist/lib/storage';
 import { REDUX_KEY } from '@/constants/constants';
 import { moneyApi } from '@/services/moneyService';
 import { productApi } from '@/services/productService';
+import { transactionSessionApi } from '@/services/transactionSessionService';
 import { CURRENT_ENVIRONMENT, Environment } from '@/utils/environmentUtils';
 
 const services = {
   [productApi.reducerPath]: productApi.reducer,
   [moneyApi.reducerPath]: moneyApi.reducer,
+  [transactionSessionApi.reducerPath]: transactionSessionApi.reducer,
 };
 
 const combinedReducers = combineReducers({
@@ -33,7 +35,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(productApi.middleware,moneyApi.middleware),
+    }).concat(productApi.middleware,moneyApi.middleware, transactionSessionApi.middleware),
   devTools: CURRENT_ENVIRONMENT !== Environment.Production,
 });
 

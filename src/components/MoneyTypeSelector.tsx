@@ -1,40 +1,59 @@
 // components/MoneyTypeSelector.tsx
 import React, { useState } from 'react';
 
-import { useGetMoneyTypesQuery, useInsertMoneyMutation } from '@/services/moneyService';
+import { TransactionSession } from '@/models/transactionSession.model';
+import { useGetMoneyTypesQuery } from '@/services/moneyService';
+import { useInsertMoneyMutation } from '@/services/transactionSessionService';
 
 import { DefaultErrorState } from './DefaultErrorState';
 import LoadingSpinner from './ui-kit/loading-spinner/LoadingSpinner';
 
+type Props = {
+    session: TransactionSession | null;
+    refetchTotal: VoidFunction
+};
 
-function MoneyTypeSelector() {
+const MoneyTypeSelector: React.FC<Props> = ({ session, refetchTotal }) => {
   const { data: moneyTypes, error, isLoading } = useGetMoneyTypesQuery();
   const [insertMoney, { isLoading: isInsertLoading }] = useInsertMoneyMutation();
-  const [selectedMoneyTypeId, setSelectedMoneyTypeId] = useState('');
+  const [selectedMoneyType, setSelectedMoneyType] = useState('');
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <DefaultErrorState error={error} />;
 
   const handleSelectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedMoneyTypeId(event.target.value);
+    setSelectedMoneyType(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (selectedMoneyTypeId) {
-      await insertMoney({ moneyTypeId: selectedMoneyTypeId });
-      alert('Money type inserted successfully!');
-    }
+    if (selectedMoneyType && session && session.sessionId) {
+        // Assume that insertMoney expects an object with session ID, money type ID, and quantity
+        try {
+          await insertMoney({
+            sessionId: parseInt(session.sessionId),
+            denomination: selectedMoneyType,
+            quantity: 1
+          }).unwrap();
+          alert('Money added successfully!');
+          refetchTotal(); 
+        } catch (error) {
+          console.error('Failed to insert money:', error);
+          alert('Failed to insert money!');
+        }
+      } else {
+        alert('Please select a money type and ensure a session is active.');
+      }
   };
 
   return (
     <div>
       <h1>Select Money Type</h1>
       <form onSubmit={handleSubmit}>
-        <select value={selectedMoneyTypeId} onChange={handleSelectionChange}>
+        <select value={selectedMoneyType} onChange={handleSelectionChange}>
           {moneyTypes?.map((type) => (
-            <option key={type.id} value={type.id}>
-              {type.id} - Value: {type.denomination}
+            <option key={type.moneyTypeID} value={type.denomination}>
+              {type.moneyTypeID} - Value: {type.denomination}
             </option>
           ))}
         </select>

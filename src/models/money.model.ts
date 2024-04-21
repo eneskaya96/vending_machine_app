@@ -1,4 +1,4 @@
 export interface MoneyType {
-    id: string;
+    moneyTypeID: string;
     denomination: number;
 }

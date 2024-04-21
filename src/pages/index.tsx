@@ -1,16 +1,14 @@
 import { ReactElement } from 'react';
 
 import { ProtectedLayout } from '@/components/layouts';
-import MoneyTypeSelector from '@/components/MoneyTypeSelector';
-import ProductList from '@/components/product-list/productList';
+import VendingMachineInterface from '@/components/VendingMachineInterface';
 
 import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <MoneyTypeSelector/>
-      <ProductList />
+      <VendingMachineInterface/>
     </>
   );
 };
