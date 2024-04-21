@@ -40,7 +40,14 @@ export const transactionSessionApi = createApi({
         params: { sessionId }
       }),
     }),
+    purchaseProduct: builder.mutation<PurchaseResult, { sessionId: number; productId: number }>({
+      query: ({ sessionId, productId }) => ({
+        url: `${getUrl(Endpoint.TRANSACTION_SESSIONS)}/${sessionId}/purchase-product`,
+        method: 'POST',
+        body: { productId }
+      }),
+    }),
   }),
 });
 
-export const {useStartSessionMutation, useInsertMoneyMutation, useGetCurrentTotalQuery, useRefundMoneyMutation} = transactionSessionApi;
+export const {useStartSessionMutation, useInsertMoneyMutation, useGetCurrentTotalQuery, useRefundMoneyMutation, usePurchaseProductMutation} = transactionSessionApi;

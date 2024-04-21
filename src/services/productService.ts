@@ -17,6 +17,7 @@ export const productApi = createApi({
         method: HttpMethod.Get,
       }),
       providesTags: ['products'],
+      keepUnusedDataFor: 0,
     }),
   }),
 });
