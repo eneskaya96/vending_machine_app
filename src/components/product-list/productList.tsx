@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Product } from '@/models/product.model';
 import { useGetProductsQuery } from '@/services/productService';
+import styles from '@/styles/components/ProductList.module.scss';
 import { matchQuery } from '@/utils/toolkitQuery';
 
 import { DefaultErrorState } from '../DefaultErrorState';
@@ -18,30 +19,29 @@ const ProductList: React.FC<Props> = ({onProductSelect}) => {
 
   return (
     <>
-      {matchQuery(query, {
-        error: (error: any) => <DefaultErrorState error={error} />,
-        idle: () => null,
-        loading: () => <LoadingSpinner />,
-        success: (products: Product[]) => (
-          <>
-            <ul>
-              {products.map((product) => (
-                <li
-                  key={product.id}
-                  style={{ backgroundColor: activeProductId === product.id ? 'lightgray' : 'transparent' }}
-                  onClick={() => {
-                    onProductSelect(product.id);
-                    setActiveProductId(product.id)
-                  }}
-                >
-                  Name: {product.name}, Quantity: {product.quantity}, Price: {product.price}
-                </li>
-              ))}
-            </ul>
-          </>
-        ),
-      })}
-    </>
+    <h2 className={styles.heading}>Select a Product</h2>
+    {matchQuery(query, {
+      error: (error: any) => <DefaultErrorState error={error} />,
+      idle: () => null,
+      loading: () => <LoadingSpinner />,
+      success: (products: Product[]) => (
+        <ul className={styles.productList}>
+          {products.map((product) => (
+            <li
+              key={product.id}
+              className={activeProductId === product.id ? styles.active : ''}
+              onClick={() => {
+                onProductSelect(product.id);
+                setActiveProductId(product.id);
+              }}
+            >
+            Name: {product.name} -- Price: {product.price} Units Money
+            </li>
+          ))}
+        </ul>
+      ),
+    })}
+  </>
   );
 }
 

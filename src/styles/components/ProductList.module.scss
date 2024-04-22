@@ -1,0 +1,32 @@
+// ProductList.module.scss
+.heading {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.productList {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+        padding: 10px 15px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+
+        &:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        &.active {
+            background-color: #e0e0e0;
+            color: #333;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+    }
+}

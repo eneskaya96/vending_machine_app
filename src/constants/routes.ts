@@ -7,5 +7,5 @@ export const Routes: Record<Pages, string> = {
 
 export const NavbarRoutes = [
   { path: Routes.Home, label: 'Home' },
-  { path: Routes.AdminPage, label: 'AdminPage' },
+  { path: Routes.AdminPage, label: 'Admin Page' },
 ];

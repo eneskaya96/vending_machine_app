@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { TransactionSession } from '@/models/transactionSession.model';
 import { useGetMoneyTypesQuery } from '@/services/moneyService';
 import { useInsertMoneyMutation } from '@/services/transactionSessionService';
+import styles from '@/styles/components/MoneyTypeSelector.module.scss';
 
 import { DefaultErrorState } from './DefaultErrorState';
 import LoadingSpinner from './ui-kit/loading-spinner/LoadingSpinner';
@@ -47,13 +48,16 @@ const MoneyTypeSelector: React.FC<Props> = ({ session, refetchTotal }) => {
   };
 
   return (
-    <div>
+    <div className={styles.moneyTypeSelector}>
       <h1>Select Money Type</h1>
       <form onSubmit={handleSubmit}>
-        <select value={selectedMoneyType} onChange={handleSelectionChange}>
+        <select value={selectedMoneyType} onChange={handleSelectionChange} className={styles.selectMenu}>
+          <option value="" disabled selected={!selectedMoneyType}>
+            Please select a money type
+          </option>
           {moneyTypes?.map((type) => (
-            <option key={type.moneyTypeID} value={type.denomination}>
-              {type.moneyTypeID} - Value: {type.denomination}
+            <option key={type.moneyTypeID} value={type.denomination} className={styles.optionItem}>
+              {type.denomination} Units
             </option>
           ))}
         </select>
