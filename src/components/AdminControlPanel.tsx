@@ -11,7 +11,7 @@ import TokenModal from "./TokenModal";
 interface Props {
 }
 
-export default function AdminControlPanel({ }: Props) {
+export default function AdminControlPanel() {
     const [isModalOpen, setModalOpen] = useState(false);
     const { token, setToken } = useAuth();
     return (

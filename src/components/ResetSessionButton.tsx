@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import React from 'react';
 
 import { useResetSessionMutation } from '@/services/transactionSessionService';
@@ -24,7 +25,8 @@ function ResetSessionButton() {
       await resetSession({ sessionId }).unwrap();
       alert('Session has been successfully reset.');
     } catch (err) {
-      const errorMessage = err.data?.message || 'Failed to reset the session.';
+      // @ts-ignore
+      const errorMessage = (err as AxiosError).response?.data?.message || 'Failed to reset the session.';
       alert(errorMessage);
     }
   };
@@ -34,7 +36,6 @@ function ResetSessionButton() {
       <button onClick={handleReset} disabled={isLoading}>
         {isLoading ? 'Resetting...' : 'Reset Session'}
       </button>
-      {isError && <p>Error resetting the session: {error?.data?.message || 'Unknown error'}</p>}
     </div>
   );
 }

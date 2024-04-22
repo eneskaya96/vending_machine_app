@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { HttpMethod } from '@/models/api.model';
+import { PurchaseResult } from '@/models/chainMap.model';
 import { TransactionSession } from '@/models/transactionSession.model';
 import axiosBaseQuery from '@/utils/axiosBaseQuery';
 

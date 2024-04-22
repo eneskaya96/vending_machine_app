@@ -15,7 +15,7 @@ export default function AddProduct() {
   const [quantity, setQuantity] = useState('');
   const { token } = useAuth();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const product = {
       name,

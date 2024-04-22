@@ -45,8 +45,8 @@ const ProductManager: React.FC = () => {
                                 Update Quantity:
                                 <input
                                     type="number"
-                                    value={updates[product.id]?.quantity || ''}
-                                    onChange={(e) => handleChange(product.id, 'quantity', e.target.value)}
+                                    value={updates[parseInt(product.id)]?.quantity || ''}
+                                    onChange={(e) => handleChange(parseInt(product.id), 'quantity', e.target.value)}
                                 />
                             </label>
                             <label>
@@ -54,11 +54,11 @@ const ProductManager: React.FC = () => {
                                 <input
                                     type="number"
                                     step="0.01"
-                                    value={updates[product.id]?.price || ''}
-                                    onChange={(e) => handleChange(product.id, 'price', e.target.value)}
+                                    value={updates[parseInt(product.id)]?.price || ''}
+                                    onChange={(e) => handleChange(parseInt(product.id), 'price', e.target.value)}
                                 />
                             </label>
-                            <button onClick={() => handleUpdate(product.id)}>Update</button>
+                            <button onClick={() => handleUpdate(parseInt(product.id))}>Update</button>
                         </div>
                     </li>
                 ))}

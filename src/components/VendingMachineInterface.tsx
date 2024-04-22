@@ -14,7 +14,7 @@ function VendingMachineInterface() {
     const [startSession, { isLoading: isStartingSession }] = useStartSessionMutation();
     const [purchaseProduct, { isLoading }] = usePurchaseProductMutation();
     const [refundMoney, { isLoading: isRefunding }] = useRefundMoneyMutation();
-    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
     const { data: currentTotal, refetch: refetchTotal } = useGetCurrentTotalQuery(session?.sessionId || '', {
       skip: !session?.sessionId,
   });
@@ -64,7 +64,9 @@ function VendingMachineInterface() {
             refetchTotal();
         } 
         catch (error) {
-            console.log('FAiled:', error.data.message);
+            // @ts-ignore
+            console.log('Failed:', error.data.message);
+            // @ts-ignore
             alert(`Failed to purchase product!  Reason:  ${ error.data.message} `);
         }
     };
