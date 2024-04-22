@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 
 import ClientOnly from '@/components/ClientOnly';
 import { DefaultErrorState } from '@/components/DefaultErrorState';
+import { AuthProvider } from '@/context/AuthContext';
 import store from '@/store';
 
 export type NextPageWithLayout = NextPage & {
@@ -33,12 +34,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <main>
         <ErrorBoundary FallbackComponent={DefaultErrorState}>
-          <Provider store={store}>
-          <ClientOnly>
-            <ToastContainer />
-            {getLayout(<Component {...pageProps} />)}
-            </ClientOnly>
-          </Provider>
+          <AuthProvider>
+            <Provider store={store}>
+            <ClientOnly>
+              <ToastContainer />
+              {getLayout(<Component {...pageProps} />)}
+              </ClientOnly>
+            </Provider>
+          </AuthProvider>
         </ErrorBoundary>
       </main>
     </>

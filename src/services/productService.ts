@@ -19,13 +19,13 @@ export const productApi = createApi({
       providesTags: ['products'],
       keepUnusedDataFor: 0,
     }),
-    addProduct: builder.mutation<Product, Partial<Product>>({
-      query: (product) => ({
+    addProduct: builder.mutation<Product, { product: Partial<Product>; token: string }>({
+      query: ({ product, token }) => ({
         url: `${getUrl(Endpoint.PRODUCTS)}/add`,
         method: HttpMethod.Post,
         body: product,
         headers: {
-          Authorization: `your-secret-token`,
+          Authorization: token,
         },
       }),
       invalidatesTags: ['products'],
