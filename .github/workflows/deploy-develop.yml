@@ -1,9 +1,9 @@
-name: Deploy main to heroku
+name: Deploy develop to heroku
 
 on:
   push:
     branches:
-      - main
+      - develop
 
   workflow_dispatch:
 
@@ -19,3 +19,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_ORG_EMAIL}}
         env:
           HD_NEXT_PUBLIC_ENV: ${{secrets.ENV_DEV}}
+          HD_NEXT_PUBLIC_BACKEND_API_URL: ${{secrets.BACKEND_API_URL_DEV}}
