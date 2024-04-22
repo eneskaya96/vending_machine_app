@@ -1,20 +1,22 @@
 import { ReactElement } from 'react';
 
+import AdminControlPanel from '@/components/AdminControlPanel';
 import { ProtectedLayout } from '@/components/layouts';
 import styles from '@/styles/pages/About.module.scss';
 
 import { NextPageWithLayout } from '../_app';
 
-const About: NextPageWithLayout = () => {
+const AdminPage: NextPageWithLayout = () => {
   return (
     <div className={styles.container}>
-      About Mobile App
+      Admin Control
+      <AdminControlPanel/>
     </div>
   );
 };
 
-export default About;
+export default AdminPage;
 
-About.getLayout = function getLayout(page: ReactElement) {
+AdminPage.getLayout = function getLayout(page: ReactElement) {
   return <ProtectedLayout>{page}</ProtectedLayout>;
 };

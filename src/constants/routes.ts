@@ -1,11 +1,11 @@
-export type Pages = 'Home' | 'About';
+export type Pages = 'Home' | 'AdminPage';
 
 export const Routes: Record<Pages, string> = {
   Home: '/',
-  About: '/about',
+  AdminPage: '/admin-page',
 };
 
 export const NavbarRoutes = [
   { path: Routes.Home, label: 'Home' },
-  { path: Routes.About, label: 'About' },
+  { path: Routes.AdminPage, label: 'AdminPage' },
 ];

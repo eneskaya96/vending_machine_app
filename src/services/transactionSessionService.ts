@@ -47,7 +47,13 @@ export const transactionSessionApi = createApi({
         body: { productId }
       }),
     }),
+    resetSession: builder.mutation<void, { sessionId: number}>({
+      query: ({sessionId}) => ({
+        url: `${getUrl(Endpoint.TRANSACTION_SESSIONS)}/${sessionId}/reset`,
+        method: HttpMethod.Post,
+      }),
+    }),
   }),
 });
 
-export const {useStartSessionMutation, useInsertMoneyMutation, useGetCurrentTotalQuery, useRefundMoneyMutation, usePurchaseProductMutation} = transactionSessionApi;
+export const {useStartSessionMutation, useInsertMoneyMutation, useGetCurrentTotalQuery, useRefundMoneyMutation, usePurchaseProductMutation, useResetSessionMutation} = transactionSessionApi;

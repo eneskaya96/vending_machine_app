@@ -14,11 +14,12 @@ const axiosBaseQuery =
       method: AxiosRequestConfig['method'];
       body?: AxiosRequestConfig['data'];
       params?: AxiosRequestConfig['params'];
+      headers?: AxiosRequestConfig['headers']
     },
     unknown,
     ApiResponse<unknown>
   > =>
-    async ({ url, method, body, params }) => {
+    async ({ url, method, body, params, headers = {} }) => {
 
       try {
         const result = await axios({
@@ -26,6 +27,9 @@ const axiosBaseQuery =
           method,
           data: body,
           params,
+          headers: {
+            ...headers,
+          },
         });
         if (result.data.success)
           return { data: result.data.data };

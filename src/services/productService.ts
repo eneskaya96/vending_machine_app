@@ -19,7 +19,29 @@ export const productApi = createApi({
       providesTags: ['products'],
       keepUnusedDataFor: 0,
     }),
+    addProduct: builder.mutation<Product, Partial<Product>>({
+      query: (product) => ({
+        url: `${getUrl(Endpoint.PRODUCTS)}/add`,
+        method: HttpMethod.Post,
+        body: product,
+        headers: {
+          Authorization: `your-secret-token`,
+        },
+      }),
+      invalidatesTags: ['products'],
+    }),
+    updateProduct: builder.mutation<Product, { productId: number; quantity?: number; price?: number }>({
+      query: ({ productId, ...patchData }) => ({
+        url: `${getUrl(Endpoint.PRODUCTS)}/${productId}/update`,
+        method: HttpMethod.Put,
+        body: patchData,
+        headers: {
+          Authorization: `your-secret-token`,
+        },
+      }),
+      invalidatesTags: ['products'],
+    }),
   }),
 });
 
-export const { useGetProductsQuery} = productApi;
+export const { useGetProductsQuery, useAddProductMutation, useUpdateProductMutation} = productApi;

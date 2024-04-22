@@ -19,14 +19,15 @@ export const moneyApi = createApi({
           }),
           providesTags: ['money-type'],
     }),
-    insertMoney: builder.mutation<void, { moneyTypeId: string }>({
-      query: (data) => ({
-        url: 'insert-money',
-        method: 'POST',
-        body: data,
+    updateMoneyTypeQuantity: builder.mutation<MoneyType, { moneyTypeId: number; quantity: number }>({
+      query: ({ moneyTypeId, quantity }) => ({
+        url: `money-types/${moneyTypeId}/update-quantity`,
+        method: 'PUT',
+        body: { quantity }
       }),
+      invalidatesTags: ['money-type'],
     }),
   }),
 });
 
-export const { useGetMoneyTypesQuery, useInsertMoneyMutation } = moneyApi;
+export const { useGetMoneyTypesQuery, useUpdateMoneyTypeQuantityMutation } = moneyApi;

@@ -1,13 +1,12 @@
 import React, { useEffect, useRef,useState } from 'react';
 
+import { formatChangeMap,PurchaseResult } from '@/models/chainMap.model';
 import { TransactionSession } from '@/models/transactionSession.model';
 import { useGetCurrentTotalQuery, usePurchaseProductMutation, useRefundMoneyMutation, useStartSessionMutation } from '@/services/transactionSessionService';
 import { getSession, setSession } from '@/utils/sessionsStorage';
 
 import MoneyTypeSelector from './MoneyTypeSelector';
 import ProductList from './product-list/productList';
-import { PurchaseResult, formatChangeMap } from '@/models/chainMap.model';
-
 
 
 function VendingMachineInterface() {
@@ -32,6 +31,7 @@ function VendingMachineInterface() {
                 setSession(transaction_session); // Store the entire session object in local storage
             }).catch(console.error);
         }
+        refetchTotal && refetchTotal();
     }, [startSession, isStartingSession]);
 
     const handleRefund = async () => {
