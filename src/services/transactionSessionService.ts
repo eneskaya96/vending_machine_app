@@ -48,10 +48,13 @@ export const transactionSessionApi = createApi({
         body: { productId }
       }),
     }),
-    resetSession: builder.mutation<void, { sessionId: number}>({
-      query: ({sessionId}) => ({
+    resetSession: builder.mutation<void, { sessionId: number; token: string }>({
+      query: ({sessionId, token}) => ({
         url: `${getUrl(Endpoint.TRANSACTION_SESSIONS)}/${sessionId}/reset`,
         method: HttpMethod.Post,
+        headers: {
+          Authorization: token,
+        },
       }),
     }),
   }),

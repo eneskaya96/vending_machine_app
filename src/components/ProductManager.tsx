@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useAuth } from '@/context/AuthContext';
+
 import { Product } from '../models/product.model';
 import { useGetProductsQuery, useUpdateProductMutation } from '../services/productService';
 
@@ -7,6 +9,7 @@ const ProductManager: React.FC = () => {
     const { data: products, isLoading, error } = useGetProductsQuery();
     const [updateProduct] = useUpdateProductMutation();
 
+    const { token } = useAuth();
     const [updates, setUpdates] = useState<Record<number, { quantity: string; price: string }>>({});
 
     const handleChange = (productId: number, field: 'quantity' | 'price', value: string) => {
@@ -25,7 +28,8 @@ const ProductManager: React.FC = () => {
             updateProduct({
                 productId,
                 quantity: parseInt(updatesToApply.quantity, 10),
-                price: parseInt(updatesToApply.price)
+                price: parseInt(updatesToApply.price),
+                token: token,
             });
         }
     };

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useAuth } from '@/context/AuthContext';
+
 import { MoneyType } from '../models/money.model';
 import { useGetMoneyTypesQuery, useUpdateMoneyTypeQuantityMutation } from '../services/moneyService';
 
@@ -7,6 +9,7 @@ const MoneyManager: React.FC = () => {
     const { data: moneyTypes, isLoading, error } = useGetMoneyTypesQuery();
     const [updateMoneyTypeQuantity] = useUpdateMoneyTypeQuantityMutation();
 
+    const { token } = useAuth();
     const [amounts, setAmounts] = useState<Record<number, string>>({});
 
     const handleAmountChange = (moneyTypeId: number, value: string) => {
@@ -16,7 +19,7 @@ const MoneyManager: React.FC = () => {
     const handleUpdateQuantity = (moneyTypeId: number) => {
         const quantity = parseInt(amounts[moneyTypeId], 10);
         if (!isNaN(quantity)) {
-            updateMoneyTypeQuantity({ moneyTypeId, quantity });
+            updateMoneyTypeQuantity({ moneyTypeId, quantity, token });
         }
     };
 

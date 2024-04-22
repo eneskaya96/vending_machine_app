@@ -1,11 +1,14 @@
 import { AxiosError } from 'axios';
 import React from 'react';
 
+import { useAuth } from '@/context/AuthContext';
 import { useResetSessionMutation } from '@/services/transactionSessionService';
 import { getSession } from '@/utils/sessionsStorage';
 
 function ResetSessionButton() {
   const [resetSession, { isLoading, isError, error }] = useResetSessionMutation();
+
+  const { token } = useAuth();
 
   const handleReset = async () => {
     const session = getSession();
@@ -14,7 +17,6 @@ function ResetSessionButton() {
       return;
     }
 
-    // Ensure sessionId is parsed as a number before passing it to resetSession
     const sessionId = parseInt(session.sessionId);
     if (isNaN(sessionId)) {
       alert('Session ID is invalid.');
@@ -22,7 +24,7 @@ function ResetSessionButton() {
     }
 
     try {
-      await resetSession({ sessionId }).unwrap();
+      await resetSession({ sessionId, token }).unwrap();
       alert('Session has been successfully reset.');
     } catch (err) {
       // @ts-ignore

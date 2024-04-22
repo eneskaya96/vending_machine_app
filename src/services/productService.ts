@@ -30,13 +30,13 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['products'],
     }),
-    updateProduct: builder.mutation<Product, { productId: number; quantity?: number; price?: number }>({
-      query: ({ productId, ...patchData }) => ({
+    updateProduct: builder.mutation<Product, { productId: number; quantity?: number; price?: number; token: string }>({
+      query: ({ productId, token, ...patchData }) => ({
         url: `${getUrl(Endpoint.PRODUCTS)}/${productId}/update`,
         method: HttpMethod.Put,
         body: patchData,
         headers: {
-          Authorization: `your-secret-token`,
+          Authorization: token,
         },
       }),
       invalidatesTags: ['products'],
