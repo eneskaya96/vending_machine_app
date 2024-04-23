@@ -1,4 +1,3 @@
-// AddProduct.module.scss
 .addProductForm {
     display: flex;
     flex-direction: column;
@@ -20,9 +19,9 @@
     .feedback {
         margin-top: 10px;
         font-size: 16px;
-        color: #721c24; // Red for errors
+        color: #721c24; 
         &.success {
-            color: #28a745; // Green for success messages
+            color: #28a745; 
         }
     }
 }

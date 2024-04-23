@@ -38,8 +38,6 @@ const axiosBaseQuery =
           error: result.data.message,
         };
       } catch (error: any) {
-        // TODO we can discuss here
-        // TODO add logging
         if (error instanceof AxiosError) {
           return {
             error: {
