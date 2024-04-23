@@ -2,9 +2,8 @@ import { useState } from "react";
 
 import { useAuth } from "@/context/AuthContext";
 import { useAddProductMutation } from "@/services/productService";
-
-interface Props {
-}
+import styles from '@/styles/components/AddProduct.module.scss';
+import globalStyles from '@/styles/components/CommonSytles.module.scss';
 
 export default function AddProduct() {
   
@@ -32,14 +31,14 @@ export default function AddProduct() {
 
   return (
     <>
-      <h1>Add Product</h1>
-      <form onSubmit={handleSubmit}>
+      <h3>Add Product</h3>
+      <form onSubmit={handleSubmit} className={styles.addProductForm}>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Product Name" required />
         <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Price" required />
         <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="Quantity" required />
-        <button type="submit" disabled={isLoading}>Add Product</button>
-        {isError && <p>Error adding product.</p>}
-        {isSuccess && <p>Product added successfully!</p>}
+        <button className={globalStyles.button} type="submit" disabled={isLoading}>Add Product</button>
+        {isError && <p className={styles.feedback}>Error adding product.</p>}
+        {isSuccess && <p className={styles.feedback + ' ' + styles.success}>Product added successfully!</p>}
       </form>
     </>
   );

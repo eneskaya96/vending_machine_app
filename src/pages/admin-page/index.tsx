@@ -8,7 +8,6 @@ import { NextPageWithLayout } from '../_app';
 const AdminPage: NextPageWithLayout = () => {
   return (
     <div >
-      Admin Control
       <AdminControlPanel/>
     </div>
   );

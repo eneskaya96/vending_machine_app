@@ -3,6 +3,7 @@ import React from 'react';
 
 import { useAuth } from '@/context/AuthContext';
 import { useResetSessionMutation } from '@/services/transactionSessionService';
+import globalStyles from '@/styles/components/CommonSytles.module.scss';
 import { getSession } from '@/utils/sessionsStorage';
 
 function ResetSessionButton() {
@@ -35,7 +36,7 @@ function ResetSessionButton() {
 
   return (
     <div>
-      <button onClick={handleReset} disabled={isLoading}>
+      <button className={globalStyles.button} onClick={handleReset} disabled={isLoading}>
         {isLoading ? 'Resetting...' : 'Reset Session'}
       </button>
     </div>

@@ -1,0 +1,28 @@
+// AddProduct.module.scss
+.addProductForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+
+    input[type="text"],
+    input[type="number"] {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .feedback {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #721c24; // Red for errors
+        &.success {
+            color: #28a745; // Green for success messages
+        }
+    }
+}

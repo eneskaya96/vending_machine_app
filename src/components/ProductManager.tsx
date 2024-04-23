@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import { useAuth } from '@/context/AuthContext';
+import globalStyles from '@/styles/components/CommonSytles.module.scss';
+import styles from '@/styles/components/ProductManager.module.scss';
 
 import { Product } from '../models/product.model';
 import { useGetProductsQuery, useUpdateProductMutation } from '../services/productService';
@@ -24,11 +26,11 @@ const ProductManager: React.FC = () => {
 
     const handleUpdate = (productId: number) => {
         const updatesToApply = updates[productId];
-        if (updatesToApply && (!isNaN(parseInt(updatesToApply.quantity)) || !isNaN(parseInt(updatesToApply.price)))) {
+        if (updatesToApply && (!isNaN(parseInt(updatesToApply.quantity)) || !isNaN(parseFloat(updatesToApply.price)))) {
             updateProduct({
                 productId,
                 quantity: parseInt(updatesToApply.quantity, 10),
-                price: parseInt(updatesToApply.price),
+                price: parseFloat(updatesToApply.price),
                 token: token,
             });
         }
@@ -38,8 +40,8 @@ const ProductManager: React.FC = () => {
     if (error) return <p>Error loading products!</p>;
 
     return (
-        <div>
-            <h1>Manage Products</h1>
+        <div className={styles.productManager}>
+            <h3>Manage Products</h3>
             <ul>
                 {products?.map((product: Product) => (
                     <li key={product.id}>
@@ -62,7 +64,7 @@ const ProductManager: React.FC = () => {
                                     onChange={(e) => handleChange(parseInt(product.id), 'price', e.target.value)}
                                 />
                             </label>
-                            <button onClick={() => handleUpdate(parseInt(product.id))}>Update</button>
+                            <button className={globalStyles.button} onClick={() => handleUpdate(parseInt(product.id))}>Update</button>
                         </div>
                     </li>
                 ))}

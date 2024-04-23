@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import { useAuth } from '@/context/AuthContext';
+import globalStyles from '@/styles/components/commonSytles.module.scss';
+import styles from '@/styles/components/MoneyManager.module.scss';
 
 import { MoneyType } from '../models/money.model';
 import { useGetMoneyTypesQuery, useUpdateMoneyTypeQuantityMutation } from '../services/moneyService';
@@ -27,18 +29,21 @@ const MoneyManager: React.FC = () => {
     if (error) return <p>Error loading money types!</p>;
 
     return (
-        <div>
-            <h1>Manage Money</h1>
+        <div className={styles.moneyManager}>
+            <h3>Manage Money</h3>
             <ul>
                 {moneyTypes?.map((moneyType: MoneyType) => (
                     <li key={moneyType.moneyTypeID}>
-                        {moneyType.name} ({moneyType.denomination}):
+                        ({moneyType.denomination} Unit Money Qunatity: ):
                         <input
                             type="number"
                             value={amounts[parseInt(moneyType.moneyTypeID)] || ''}
                             onChange={(e) => handleAmountChange(parseInt(moneyType.moneyTypeID), e.target.value)}
                         />
-                        <button onClick={() => handleUpdateQuantity(parseInt(moneyType.moneyTypeID))}>Update</button>
+                        <button className={globalStyles.button} onClick={() => handleUpdateQuantity(parseInt(moneyType.moneyTypeID))}>Update</button>
+                        <div>
+                            (Current Qunatity: {moneyType.quantity})
+                        </div>
                     </li>
                 ))}
             </ul>
