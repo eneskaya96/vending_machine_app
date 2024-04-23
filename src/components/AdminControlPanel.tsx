@@ -28,10 +28,8 @@ export default function AdminControlPanel() {
                 </>
             ) : (
                 <>
-                    <div className={styles.alert}>
-                        <p>You need to enter a token to access admin functionalities.</p>
-                        <button className={globalStyles.button}  onClick={() => setModalOpen(true)}>Enter Token</button>
-                    </div>
+                    <p>You need to enter a token to access admin functionalities.</p>
+                    <button className={globalStyles.button}  onClick={() => setModalOpen(true)}>Enter Token</button>
                 </>
             )}
         </div>
