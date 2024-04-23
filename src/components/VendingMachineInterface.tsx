@@ -22,9 +22,7 @@ function VendingMachineInterface() {
         if (!session && !initiatedRef.current && !isStartingSession) {
             initiatedRef.current = true;
             startSession().unwrap().then(setNewSession).catch(console.error);
-        } else {
-            refetchTotal && refetchTotal();
-        }
+        } 
     }, [session, startSession, isStartingSession]);
 
     const setNewSession = (transaction_session: any) => {

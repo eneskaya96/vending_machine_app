@@ -13,11 +13,12 @@ export const moneyApi = createApi({
   tagTypes: ['money-type'],
   endpoints: (builder) => ({
     getMoneyTypes: builder.query<MoneyType[], void>({
-        query: () => ({
-            url: `${getUrl(Endpoint.MONEY_TYPES)}`,
-            method: HttpMethod.Get,
-          }),
-          providesTags: ['money-type'],
+      query: () => ({
+        url: `${getUrl(Endpoint.MONEY_TYPES)}`,
+        method: HttpMethod.Get,
+      }),
+      providesTags: ['money-type'],
+      keepUnusedDataFor: 0,
     }),
     updateMoneyTypeQuantity: builder.mutation<MoneyType, { moneyTypeId: number; quantity: number;token: string }>({
       query: ({ moneyTypeId, quantity, token }) => ({
