@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useAuth } from "@/context/AuthContext";
-import globalStyles from '@/styles/components/commonSytles.module.scss';
+import globalStyles from '@/styles/components/CommonSytles.module.scss';
 import styles from '@/styles/pages/AdminControlPanel.module.scss';
 
 import AddProduct from "./AddProduct";
